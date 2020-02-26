@@ -25,7 +25,7 @@ export function FindByTitleControllerMixin<M extends Model, T extends Constructo
       super(...args);
     }
 
-    @get(options.basePath + '/findByTitle/{title}', {
+    @get(`${options.basePath}/findByTitle/{title}`, {
       responses: {
         '200': {
           description: `Array of ${options.modelClassName} model instances`,
