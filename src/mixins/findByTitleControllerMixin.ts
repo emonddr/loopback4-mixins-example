@@ -12,7 +12,7 @@ import {
 export interface FindByTitleControllerMixinOptions {
 
   basePath: string;
-  modelClass: Constructor<{}>;
+  modelClass: Constructor<object>;
   modelClassName: string;
 }
 
