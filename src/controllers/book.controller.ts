@@ -22,14 +22,25 @@ import {
 import {Book} from '../models';
 import {BookRepository} from '../repositories';
 
-import {FindByTitleControllerMixin, FindByTitleControllerMixinParms} from '../mixins/findByTitleControllerMixin';
+import {FindByTitleControllerMixin, FindByTitleControllerMixinOptions} from '../mixins/findByTitleControllerMixin';
 import {Constructor} from '@loopback/core';
 
-class TempBookController {
+const options: FindByTitleControllerMixinOptions = {
+  basePath: '/books',
+  modelClass: Book,
+  modelClassName: 'Book'
+};
+
+export class BookController extends FindByTitleControllerMixin<Book, Constructor<Object>>(
+  Object, options,
+) {
+
   constructor(
     @repository(BookRepository)
     public repository: BookRepository,
-  ) {}
+  ) {
+    super();
+  }
 
   @post('/books', {
     responses: {
@@ -178,16 +189,6 @@ class TempBookController {
   }
 
 }
-
-const mixinParms: FindByTitleControllerMixinParms = {
-  basePath: '/books',
-  modelClass: Book,
-  modelClassName: 'Book'
-};
-
-export class BookController extends FindByTitleControllerMixin<Book, Constructor<TempBookController>>(
-  TempBookController, mixinParms,
-) {}
 
 
 

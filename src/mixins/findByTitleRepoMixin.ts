@@ -5,7 +5,11 @@ import {
 import {Model} from '@loopback/repository';
 import {FindByTitleInterface} from './findByTitleInterface';
 
-export function FindByTitleRepositoryMixin<M extends Model, T extends Constructor<any>>(superClass: T) {
+/*
+ * This function adds a new method 'findByTitle' to a repository class
+ * where 'M' is a model and 'R' is DefaultCrudRepository
+ */
+export function FindByTitleRepositoryMixin<M extends Model, R extends Constructor<any>>(superClass: R) {
 
   return class extends superClass implements FindByTitleInterface<M> {
 
@@ -15,8 +19,7 @@ export function FindByTitleRepositoryMixin<M extends Model, T extends Constructo
           title: title
         }
       };
-      const foundItems = await this.find(titleFilter);
-      return foundItems;
+      return await this.find(titleFilter);
     }
   }
 }

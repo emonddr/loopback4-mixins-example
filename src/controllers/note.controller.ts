@@ -1,5 +1,5 @@
 import {Note} from '../models';
-import {FindByTitleControllerMixin, FindByTitleControllerMixinParms} from '../mixins/findByTitleControllerMixin';
+import {FindByTitleControllerMixin, FindByTitleControllerMixinOptions} from '../mixins/findByTitleControllerMixin';
 import {Constructor} from '@loopback/core';
 
 import {
@@ -21,17 +21,24 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-
 import {NoteRepository} from '../repositories';
 
+const options: FindByTitleControllerMixinOptions = {
+  basePath: '/notes',
+  modelClass: Note,
+  modelClassName: 'Note'
+};
 
-
-class TempNoteController {
+export class NoteController extends FindByTitleControllerMixin<Note, Constructor<Object>>(
+  Object, options,
+) {
 
   constructor(
     @repository(NoteRepository)
     public repository: NoteRepository,
-  ) {}
+  ) {
+    super();
+  }
 
   @post('/notes', {
     responses: {
@@ -54,10 +61,7 @@ class TempNoteController {
     })
     note: Omit<Note, 'id'>,
   ): Promise<Note> {
-    console.log();
-    const newNote = this.repository.create(note);
-    console.log();
-    return newNote;
+    return this.repository.create(note);
   }
 
 
@@ -191,16 +195,6 @@ class TempNoteController {
   }
 
 }
-
-const mixinParms: FindByTitleControllerMixinParms = {
-  basePath: '/notes',
-  modelClass: Note,
-  modelClassName: 'Note'
-};
-
-export class NoteController extends FindByTitleControllerMixin<Note, Constructor<TempNoteController>>(
-  TempNoteController, mixinParms,
-) {}
 
 
 

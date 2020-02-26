@@ -15,7 +15,5 @@ Book,
     @inject('datasources.db') dataSource: DbDataSource,
   ) {
     super(Book, dataSource);
-    console.log("");
-    //console.log(JSON.stringify(this));
   }
 }

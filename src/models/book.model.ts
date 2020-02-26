@@ -1,8 +1,16 @@
-import {Entity, model, property} from '@loopback/repository';
-import {addCategoryPropertyMixin} from '../mixins/categoryPropertyMixin';
+import {model, property} from '@loopback/repository';
+import {AddCategoryPropertyMixin} from '../mixins/categoryPropertyMixin';
+import {BaseModel} from './baseModel';
 
+@model()
+export class Book extends AddCategoryPropertyMixin(
+  BaseModel,
+) {
 
-class TempBook extends Entity {
+  constructor(data?: Partial<Book>) {
+    super(data);
+  }
+
   @property({
     type: 'string',
     required: true,
@@ -28,21 +36,6 @@ class TempBook extends Entity {
   isbn: string;
 
 
-  constructor(data?: Partial<TempBook>) {
-    super(data);
-  }
-}
-
-
-@model()
-export class Book extends addCategoryPropertyMixin(
-  TempBook,
-) {
-
-  constructor(data?: Partial<Book>) {
-    super(data);
-  }
-
 
 }
 
@@ -50,4 +43,4 @@ export interface BookRelations {
   // describe navigational properties here
 }
 
-export type BookWithRelations = TempBook & BookRelations;
+export type BookWithRelations = Book & BookRelations;

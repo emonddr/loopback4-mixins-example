@@ -1,9 +1,14 @@
-import {Entity, model, property} from '@loopback/repository';
-import {addCategoryPropertyMixin} from '../mixins/categoryPropertyMixin';
+import {model, property} from '@loopback/repository';
+import {AddCategoryPropertyMixin} from '../mixins/categoryPropertyMixin';
+import {BaseModel} from './baseModel';
 
 
+@model()
+export class Note extends AddCategoryPropertyMixin(BaseModel) {
+  constructor(data?: Partial<Note>) {
+    super(data);
+  }
 
-class TempNote extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -21,22 +26,6 @@ class TempNote extends Entity {
     type: 'string',
   })
   content?: string;
-
-
-  constructor(data?: Partial<TempNote>) {
-    super(data);
-  }
-}
-
-@model()
-export class Note extends addCategoryPropertyMixin(
-  TempNote,
-) {
-
-  constructor(data?: Partial<Note>) {
-    super(data);
-  }
-
 
 }
 

@@ -4,7 +4,7 @@ import {
 
 import {property} from '@loopback/repository';
 
-export function addCategoryPropertyMixin<T extends Constructor<any>>(superClass: T) {
+export function AddCategoryPropertyMixin<T extends Constructor<any>>(superClass: T) {
 
   class MixedModel extends superClass {
 

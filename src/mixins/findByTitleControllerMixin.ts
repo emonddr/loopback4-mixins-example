@@ -9,14 +9,14 @@ import {
   getModelSchemaRef
 } from '@loopback/rest';
 
-export interface FindByTitleControllerMixinParms {
+export interface FindByTitleControllerMixinOptions {
 
   basePath: string;
   modelClass: Constructor<{}>;
   modelClassName: string;
 }
 
-export function FindByTitleControllerMixin<M extends Model, T extends Constructor<any>>(superClass: T, parms: FindByTitleControllerMixinParms) {
+export function FindByTitleControllerMixin<M extends Model, T extends Constructor<any>>(superClass: T, options: FindByTitleControllerMixinOptions) {
 
 
   class MixedController extends superClass implements FindByTitleInterface<M> {
@@ -25,15 +25,15 @@ export function FindByTitleControllerMixin<M extends Model, T extends Constructo
       super(...args);
     }
 
-    @get(parms.basePath + '/findByTitle/{title}', {
+    @get(options.basePath + '/findByTitle/{title}', {
       responses: {
         '200': {
-          description: `Array of ${parms.modelClassName} model instances`,
+          description: `Array of ${options.modelClassName} model instances`,
           content: {
             'application/json': {
               schema: {
                 type: 'array',
-                items: getModelSchemaRef(parms.modelClass, {includeRelations: true}),
+                items: getModelSchemaRef(options.modelClass, {includeRelations: true}),
               },
             },
           },
@@ -43,13 +43,8 @@ export function FindByTitleControllerMixin<M extends Model, T extends Constructo
     async findByTitle(
       @param.path.string('title') title: string,
     ): Promise<[M]> {
-
-      let foundItems = await this.repository.findByTitle(title);
-
-      return foundItems;
+      return await this.repository.findByTitle(title);
     }
-
-
   }
 
   return MixedController;
