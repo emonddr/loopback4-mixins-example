@@ -1,10 +1,10 @@
 import {model, property} from '@loopback/repository';
 import {AddCategoryPropertyMixin} from '../mixins/categoryPropertyMixin';
-import {BaseModel} from './baseModel';
+import {BaseEntity} from './baseEntity';
 
 @model()
 export class Book extends AddCategoryPropertyMixin(
-  BaseModel,
+  BaseEntity,
 ) {
 
   constructor(data?: Partial<Book>) {
