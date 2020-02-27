@@ -28,7 +28,6 @@ import {Constructor} from '@loopback/core';
 const options: FindByTitleControllerMixinOptions = {
   basePath: '/books',
   modelClass: Book,
-  modelClassName: 'Book'
 };
 
 export class BookController extends FindByTitleControllerMixin<Book, Constructor<Object>>(

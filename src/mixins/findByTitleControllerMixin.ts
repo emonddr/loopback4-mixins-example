@@ -12,8 +12,7 @@ import {
 export interface FindByTitleControllerMixinOptions {
 
   basePath: string;
-  modelClass: Constructor<object>;
-  modelClassName: string;
+  modelClass: typeof Model;
 }
 
 export function FindByTitleControllerMixin<M extends Model, T extends Constructor<any>>(superClass: T, options: FindByTitleControllerMixinOptions) {
@@ -28,7 +27,7 @@ export function FindByTitleControllerMixin<M extends Model, T extends Constructo
     @get(`${options.basePath}/findByTitle/{title}`, {
       responses: {
         '200': {
-          description: `Array of ${options.modelClassName} model instances`,
+          description: `Array of ${options.modelClass.modelName} model instances`,
           content: {
             'application/json': {
               schema: {

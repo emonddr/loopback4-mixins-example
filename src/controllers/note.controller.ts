@@ -26,7 +26,6 @@ import {NoteRepository} from '../repositories';
 const options: FindByTitleControllerMixinOptions = {
   basePath: '/notes',
   modelClass: Note,
-  modelClassName: 'Note'
 };
 
 export class NoteController extends FindByTitleControllerMixin<Note, Constructor<Object>>(
