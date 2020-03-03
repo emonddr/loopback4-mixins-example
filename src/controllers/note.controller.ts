@@ -1,5 +1,5 @@
 import {Note} from '../models';
-import {FindByTitleControllerMixin, FindByTitleControllerMixinOptions} from '../mixins/findByTitleControllerMixin';
+import {FindByTitleControllerMixin, FindByTitleControllerMixinOptions} from '../mixins/find-by-title-controller-mixin';
 import {Constructor} from '@loopback/core';
 
 import {
@@ -28,9 +28,10 @@ const options: FindByTitleControllerMixinOptions = {
   modelClass: Note,
 };
 
-export class NoteController extends FindByTitleControllerMixin<Note, Constructor<Object>>(
-  Object, options,
-) {
+export class NoteController extends FindByTitleControllerMixin<
+  Note,
+  Constructor<Object>
+>(Object, options) {
 
   constructor(
     @repository(NoteRepository)

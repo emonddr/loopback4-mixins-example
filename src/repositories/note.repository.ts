@@ -1,17 +1,17 @@
 
-import {FindByTitleRepositoryMixin} from '../mixins/findByTitleRepoMixin';
+import {FindByTitleRepositoryMixin} from '../mixins/find-by-title-repository-mixin';
 import {DefaultCrudRepository} from '@loopback/repository';
-import {Note, NoteRelations} from '../models';
+import {Note,NoteRelations} from '../models';
 import {DbDataSource} from '../datasources';
-import {inject, Constructor} from '@loopback/core';
+import {inject} from '@loopback/core';
+import {Constructor} from '@loopback/core';
 
-export class NoteRepository extends FindByTitleRepositoryMixin<Note, Constructor<DefaultCrudRepository<
+export class NoteRepository extends FindByTitleRepositoryMixin<
   Note,
-  typeof Note.prototype.id,
-  NoteRelations
->>>(
-  DefaultCrudRepository,
-) {
+  Constructor<
+    DefaultCrudRepository<Note, typeof Note.prototype.id, NoteRelations>
+  >
+>(DefaultCrudRepository) {
   constructor(
     @inject('datasources.db') dataSource: DbDataSource,
   ) {

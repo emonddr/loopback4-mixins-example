@@ -19,10 +19,11 @@ import {
   requestBody,
 } from '@loopback/rest';
 
+
 import {Book} from '../models';
 import {BookRepository} from '../repositories';
 
-import {FindByTitleControllerMixin, FindByTitleControllerMixinOptions} from '../mixins/findByTitleControllerMixin';
+import {FindByTitleControllerMixin, FindByTitleControllerMixinOptions} from '../mixins/find-by-title-controller-mixin';
 import {Constructor} from '@loopback/core';
 
 const options: FindByTitleControllerMixinOptions = {

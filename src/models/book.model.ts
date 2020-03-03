@@ -1,6 +1,6 @@
 import {model, property} from '@loopback/repository';
-import {AddCategoryPropertyMixin} from '../mixins/categoryPropertyMixin';
-import {BaseEntity} from './baseEntity';
+import {AddCategoryPropertyMixin} from '../mixins/category-property-mixin';
+import {BaseEntity} from './base-entity';
 
 @model()
 export class Book extends AddCategoryPropertyMixin(
